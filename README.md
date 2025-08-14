@@ -16,7 +16,7 @@
 
 ### リポジトリのクローン
 ```
-git clone --recursive git@github.com:Kengokuma/rcj2025_ros2.git
+git clone --recursive https://github.com/Kengokuma/rcj2025_ros2.git
 ```
 
 ### 依存関係のセットアップ
