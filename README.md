@@ -14,6 +14,11 @@
 - ノード実装はソース(cpp)とヘッダ(hpp)に分け、rclcpp_componentsを用いて実行ファイルを生成する
 - ノードを実装したら、インターフェース(topic・service名、型、内容)とパラメータについてパッケージのdocディレクトリにドキュメントを残す
 
+### リポジトリのクローン
+```
+git clone --recursive git@github.com:Kengokuma/rcj2025_ros2.git
+```
+
 ### 依存関係のセットアップ
 ```
 rosdep update
