@@ -1,0 +1,9 @@
+<launch>
+
+<rosparam file="$(find rcj2025_description)/launch/controller.yaml" command="load"/>
+<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="rcj2025" args="回転 100_position_controller 回転 101_position_controller 回転 102_position_controller 回転 103_position_controller joint_state_controller "/>
+<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+  <remap from="/joint_states" to="/rcj2025/joint_states"/>
+</node>
+
+</launch>

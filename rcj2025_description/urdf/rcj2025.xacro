@@ -1,0 +1,140 @@
+<?xml version="1.0" ?>
+<robot name="rcj2025" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find rcj2025_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find rcj2025_description)/urdf/rcj2025.trans" />
+<xacro:include filename="$(find rcj2025_description)/urdf/rcj2025.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="-0.0008436056640299374 0.08187967201339755 -0.0021723659327403414" rpy="0 0 0"/>
+    <mass value="6.211712403129365"/>
+    <inertia ixx="0.020157" iyy="0.025166" izz="0.014889" ixy="0.00016" iyz="-0.000113" ixz="5.6e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rcj2025_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rcj2025_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="wheel_left_forward_link_1">
+  <inertial>
+    <origin xyz="0.0038321243790345877 -0.009000829458104417 0.0003539119469893326" rpy="0 0 0"/>
+    <mass value="0.30797982883853386"/>
+    <inertia ixx="0.000267" iyy="0.000139" izz="0.000139" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.074905 -0.050003 -0.044995" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rcj2025_description)/meshes/wheel_left_forward_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.074905 -0.050003 -0.044995" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rcj2025_description)/meshes/wheel_left_forward_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="wheel_right_forward_link_1">
+  <inertial>
+    <origin xyz="-0.0038321243830769514 -0.009003458642732436 0.00034373391199247344" rpy="0 0 0"/>
+    <mass value="0.30797982860031553"/>
+    <inertia ixx="0.000267" iyy="0.000139" izz="0.000139" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.074905 -0.050003 -0.044995" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rcj2025_description)/meshes/wheel_right_forward_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.074905 -0.050003 -0.044995" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rcj2025_description)/meshes/wheel_right_forward_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="wheel_right_backward_link_1">
+  <inertial>
+    <origin xyz="-0.0038321243783342313 -0.00899395860298674 -0.00012307261745360398" rpy="0 0 0"/>
+    <mass value="0.3079798288624377"/>
+    <inertia ixx="0.000267" iyy="0.000139" izz="0.000139" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.074905 -0.050003 0.044995" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rcj2025_description)/meshes/wheel_right_backward_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.074905 -0.050003 0.044995" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rcj2025_description)/meshes/wheel_right_backward_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="wheel_left_backward_link_1">
+  <inertial>
+    <origin xyz="0.003832124382646254 -0.009003945927425837 -0.0003437082381777534" rpy="0 0 0"/>
+    <mass value="0.30797982861500756"/>
+    <inertia ixx="0.000267" iyy="0.000139" izz="0.000139" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.074905 -0.050003 0.044995" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rcj2025_description)/meshes/wheel_left_backward_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.074905 -0.050003 0.044995" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find rcj2025_description)/meshes/wheel_left_backward_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="回転 100" type="continuous">
+  <origin xyz="0.074905 0.050003 0.044995" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="wheel_left_forward_link_1"/>
+  <axis xyz="1.0 -0.0 -0.0"/>
+</joint>
+
+<joint name="回転 101" type="continuous">
+  <origin xyz="-0.074905 0.050003 0.044995" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="wheel_right_forward_link_1"/>
+  <axis xyz="1.0 0.0 0.0"/>
+</joint>
+
+<joint name="回転 102" type="continuous">
+  <origin xyz="-0.074905 0.050003 -0.044995" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="wheel_right_backward_link_1"/>
+  <axis xyz="-1.0 -0.0 0.0"/>
+</joint>
+
+<joint name="回転 103" type="continuous">
+  <origin xyz="0.074905 0.050003 -0.044995" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="wheel_left_backward_link_1"/>
+  <axis xyz="-1.0 0.0 -0.0"/>
+</joint>
+
+</robot>

@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<robot name="rcj2025" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+<transmission name="回転 100_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="回転 100">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="回転 100_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="回転 101_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="回転 101">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="回転 101_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="回転 102_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="回転 102">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="回転 102_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="回転 103_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="回転 103">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="回転 103_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+</robot>
