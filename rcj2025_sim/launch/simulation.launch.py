@@ -53,10 +53,10 @@ def generate_launch_description():
     pose = {
         'x': LaunchConfiguration('x_pose', default='0.00'),
         'y': LaunchConfiguration('y_pose', default='0.00'),
-        'z': LaunchConfiguration('z_pose', default='0.09'),
-        'R': LaunchConfiguration('roll', default='1.57'),
-        'P': LaunchConfiguration('pitch', default='0.00'),
-        'Y': LaunchConfiguration('yaw', default='1.57'),
+        'z': LaunchConfiguration('z_pose', default='0.009'),
+        'R': LaunchConfiguration('roll', default='0.00'),
+        'P': LaunchConfiguration('pitch', default='-1.57'),
+        'Y': LaunchConfiguration('yaw', default='-1.57'),
     }
     robot_name = LaunchConfiguration('robot_name')
     robot_sdf = LaunchConfiguration('robot_sdf')

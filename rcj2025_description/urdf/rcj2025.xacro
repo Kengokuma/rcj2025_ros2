@@ -11,14 +11,14 @@
     <inertia ixx="0.014889" iyy="0.020157" izz="0.025166" ixy="5.6e-05" iyz="0.00016" ixz="-0.000113"/>
   </inertial>
   <visual>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <origin xyz="0 0 0" rpy="1.57 0 1.57"/>
     <geometry>
       <mesh filename="file://$(find rcj2025_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <origin xyz="0 0 0" rpy="1.57 0 1.57"/>
     <geometry>
       <mesh filename="file://$(find rcj2025_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -32,14 +32,14 @@
     <inertia ixx="0.000139" iyy="0.000267" izz="0.000139" ixy="0.0" iyz="0.0" ixz="0.0"/>
   </inertial>
   <visual>
-    <origin xyz="-0.032003 -0.044995 -0.074905" rpy="0 0 0"/>
+    <origin xyz="-0.032003 -0.044995 -0.074905" rpy="1.57 0 1.57"/>
     <geometry>
       <mesh filename="file://$(find rcj2025_description)/meshes/wheel_left_forward_link_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
-    <origin xyz="-0.032003 -0.044995 -0.074905" rpy="0 0 0"/>
+    <origin xyz="-0.032003 -0.044995 -0.074905" rpy="1.57 0 1.57"/>
     <geometry>
       <mesh filename="file://$(find rcj2025_description)/meshes/wheel_left_forward_link_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -53,14 +53,14 @@
     <inertia ixx="0.000139" iyy="0.000267" izz="0.000139" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
   </inertial>
   <visual>
-    <origin xyz="-0.032003 -0.044995 0.074905" rpy="0 0 0"/>
+    <origin xyz="-0.032003 -0.044995 0.074905" rpy="1.57 0 1.57"/>
     <geometry>
       <mesh filename="file://$(find rcj2025_description)/meshes/wheel_right_forward_link_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
-    <origin xyz="-0.032003 -0.044995 0.074905" rpy="0 0 0"/>
+    <origin xyz="-0.032003 -0.044995 0.074905" rpy="1.57 0 1.57"/>
     <geometry>
       <mesh filename="file://$(find rcj2025_description)/meshes/wheel_right_forward_link_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -74,14 +74,14 @@
     <inertia ixx="0.000139" iyy="0.000267" izz="0.000139" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
   </inertial>
   <visual>
-    <origin xyz="-0.032003 0.044995 0.074905" rpy="0 0 0"/>
+    <origin xyz="-0.032003 0.044995 0.074905" rpy="1.57 0 1.57"/>
     <geometry>
       <mesh filename="file://$(find rcj2025_description)/meshes/wheel_right_backward_link_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
-    <origin xyz="-0.032003 0.044995 0.074905" rpy="0 0 0"/>
+    <origin xyz="-0.032003 0.044995 0.074905" rpy="1.57 0 1.57"/>
     <geometry>
       <mesh filename="file://$(find rcj2025_description)/meshes/wheel_right_backward_link_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -95,14 +95,14 @@
     <inertia ixx="0.000139" iyy="0.000267" izz="0.000139" ixy="-0.0" iyz="0.0" ixz="0.0"/>
   </inertial>
   <visual>
-    <origin xyz="-0.032003 0.044995 -0.074905" rpy="0 0 0"/>
+    <origin xyz="-0.032003 0.044995 -0.074905" rpy="1.57 0 1.57"/>
     <geometry>
       <mesh filename="file://$(find rcj2025_description)/meshes/wheel_left_backward_link_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
-    <origin xyz="-0.032003 0.044995 -0.074905" rpy="0 0 0"/>
+    <origin xyz="-0.032003 0.044995 -0.074905" rpy="1.57 0 1.57"/>
     <geometry>
       <mesh filename="file://$(find rcj2025_description)/meshes/wheel_left_backward_link_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -113,28 +113,28 @@
   <origin xyz="0.032003 0.044995 0.074905" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="wheel_left_forward_link_1"/>
-  <axis xyz="-0.0 1.0 -0.0"/>
+  <axis xyz="0.0 0.0 1.0"/>
 </joint>
 
 <joint name="wheel_right_forward_joint" type="continuous">
   <origin xyz="0.032003 0.044995 -0.074905" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="wheel_right_forward_link_1"/>
-  <axis xyz="0.0 1.0 0.0"/>
+  <axis xyz="0.0 0.0 1.0"/>
 </joint>
 
 <joint name="wheel_right_backward_joint" type="continuous">
   <origin xyz="0.032003 -0.044995 -0.074905" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="wheel_right_backward_link_1"/>
-  <axis xyz="0.0 -1.0 -0.0"/>
+  <axis xyz="0.0 0.0 1.0"/>
 </joint>
 
 <joint name="wheel_left_backward_joint" type="continuous">
   <origin xyz="0.032003 -0.044995 0.074905" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="wheel_left_backward_link_1"/>
-  <axis xyz="-0.0 -1.0 0.0"/>
+  <axis xyz="0.0 0.0 1.0"/>
 </joint>
 
 </robot>
