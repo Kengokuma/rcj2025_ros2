@@ -5,14 +5,6 @@
 <xacro:include filename="$(find rcj2025_description)/urdf/rcj2025.trans" />
 <xacro:include filename="$(find rcj2025_description)/urdf/rcj2025.gazebo" />
 
-<link name="base_footprint"/>
-
-<joint name="base_link_joint" type="fixed">
-  <origin xyz="0 0.009 0" rpy="0 0 0"/>
-  <parent link="base_footprint"/>
-  <child link="base_link"/>
-</joint>
-
 <link name="base_link">
   <inertial>
     <origin xyz="-0.0008436056640299374 0.07287967201339762 -0.002172365932740341" rpy="0 0 0"/>
@@ -118,28 +110,29 @@
   </collision>
 </link>
 
-<joint name="回転 100" type="continuous">
+
+<joint name="wheel_left_forward_joint" type="continuous">
   <origin xyz="0.074905 0.032003 0.044995" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="wheel_left_forward_link_1"/>
   <axis xyz="1.0 -0.0 -0.0"/>
 </joint>
 
-<joint name="回転 101" type="continuous">
+<joint name="wheel_right_forward_joint" type="continuous">
   <origin xyz="-0.074905 0.032003 0.044995" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="wheel_right_forward_link_1"/>
   <axis xyz="1.0 0.0 0.0"/>
 </joint>
 
-<joint name="回転 102" type="continuous">
+<joint name="wheel_right_backward_joint" type="continuous">
   <origin xyz="-0.074905 0.032003 -0.044995" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="wheel_right_backward_link_1"/>
   <axis xyz="-1.0 -0.0 0.0"/>
 </joint>
 
-<joint name="回転 103" type="continuous">
+<joint name="wheel_left_backward_joint" type="continuous">
   <origin xyz="0.074905 0.032003 -0.044995" rpy="0 0 0"/>
   <parent link="base_link"/>
   <child link="wheel_left_backward_link_1"/>

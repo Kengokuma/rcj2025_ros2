@@ -22,6 +22,7 @@ from launch_ros.actions import Node
 
 
 def generate_launch_description():
+    bringup_dir = get_package_share_directory('nav2_bringup')
     # Get the launch directory
     sim_dir = get_package_share_directory('rcj2025_sim')
     desc_dir = get_package_share_directory('rcj2025_description')
@@ -30,6 +31,17 @@ def generate_launch_description():
     # Create the launch configuration variables
     namespace = LaunchConfiguration('namespace')
     use_sim_time = LaunchConfiguration('use_sim_time')
+
+    # Create the launch configuration variables
+    slam = LaunchConfiguration('slam')
+    namespace = LaunchConfiguration('namespace')
+    use_namespace = LaunchConfiguration('use_namespace')
+    map_yaml_file = LaunchConfiguration('map')
+    use_sim_time = LaunchConfiguration('use_sim_time')
+    params_file = LaunchConfiguration('params_file')
+    autostart = LaunchConfiguration('autostart')
+    use_composition = LaunchConfiguration('use_composition')
+    use_respawn = LaunchConfiguration('use_respawn')
 
     # Launch configuration variables specific to simulation
     rviz_config_file = LaunchConfiguration('rviz_config_file')
@@ -41,7 +53,7 @@ def generate_launch_description():
     pose = {
         'x': LaunchConfiguration('x_pose', default='0.00'),
         'y': LaunchConfiguration('y_pose', default='0.00'),
-        'z': LaunchConfiguration('z_pose', default='0.00'),
+        'z': LaunchConfiguration('z_pose', default='0.09'),
         'R': LaunchConfiguration('roll', default='1.57'),
         'P': LaunchConfiguration('pitch', default='0.00'),
         'Y': LaunchConfiguration('yaw', default='1.57'),
@@ -58,6 +70,7 @@ def generate_launch_description():
     remappings = [('/tf', 'tf'), ('/tf_static', 'tf_static')]
 
     # Declare the launch arguments
+    
     declare_namespace_cmd = DeclareLaunchArgument(
         'namespace', default_value='', description='Top-level namespace'
     )
@@ -66,6 +79,46 @@ def generate_launch_description():
         'use_sim_time',
         default_value='True',
         description='Use simulation (Gazebo) clock if true',
+    )
+
+    declare_use_namespace_cmd = DeclareLaunchArgument(
+        'use_namespace',
+        default_value='false',
+        description='Whether to apply a namespace to the navigation stack',
+    )
+
+    declare_slam_cmd = DeclareLaunchArgument(
+        'slam', default_value='False', description='Whether run a SLAM'
+    )
+
+    declare_map_yaml_cmd = DeclareLaunchArgument(
+        'map',
+        default_value=os.path.join(bringup_dir, 'maps', 'depot.yaml'),  # Try warehouse.yaml!
+        description='Full path to map file to load',
+    )
+
+    declare_params_file_cmd = DeclareLaunchArgument(
+        'params_file',
+        default_value=os.path.join(bringup_dir, 'params', 'nav2_params.yaml'),
+        description='Full path to the ROS2 parameters file to use for all launched nodes',
+    )
+
+    declare_autostart_cmd = DeclareLaunchArgument(
+        'autostart',
+        default_value='true',
+        description='Automatically startup the nav2 stack',
+    )
+
+    declare_use_composition_cmd = DeclareLaunchArgument(
+        'use_composition',
+        default_value='True',
+        description='Whether to use composed bringup',
+    )
+
+    declare_use_respawn_cmd = DeclareLaunchArgument(
+        'use_respawn',
+        default_value='False',
+        description='Whether to respawn if a node crashes. Applied when composition is disabled.',
     )
 
     declare_rviz_config_file_cmd = DeclareLaunchArgument(
@@ -126,14 +179,14 @@ def generate_launch_description():
         remappings=remappings,
     )
 
-    joint_state_publisher_node = Node(
+    joint_state_publisher_cmd = Node(
         condition=IfCondition(headless),
         package='joint_state_publisher',
         executable='joint_state_publisher',
         name='joint_state_publisher'
     )
 
-    joint_state_publisher_gui_node = Node(
+    joint_state_publisher_gui_cmd = Node(
         condition=UnlessCondition(headless),
         package='joint_state_publisher_gui',
         executable='joint_state_publisher_gui',
@@ -149,6 +202,21 @@ def generate_launch_description():
         arguments=['-d', rviz_config_file],
         parameters=[{'use_sim_time': use_sim_time}],
         remappings=remappings,
+    )
+
+    bringup_cmd = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(os.path.join(bringup_dir,'launch', 'bringup_launch.py')),
+        launch_arguments={
+            'namespace': namespace,
+            'use_namespace': use_namespace,
+            'slam': slam,
+            'map': map_yaml_file,
+            'use_sim_time': use_sim_time,
+            'params_file': params_file,
+            'autostart': autostart,
+            'use_composition': use_composition,
+            'use_respawn': use_respawn,
+        }.items(),
     )
 
     # The SDF file for the world is a xacro file because we wanted to
@@ -204,7 +272,14 @@ def generate_launch_description():
 
     # Declare the launch options
     ld.add_action(declare_namespace_cmd)
+    ld.add_action(declare_use_namespace_cmd)
+    ld.add_action(declare_slam_cmd)
+    ld.add_action(declare_map_yaml_cmd)
     ld.add_action(declare_use_sim_time_cmd)
+    ld.add_action(declare_params_file_cmd)
+    ld.add_action(declare_autostart_cmd)
+    ld.add_action(declare_use_composition_cmd)
+    ld.add_action(declare_use_respawn_cmd)
 
     ld.add_action(declare_rviz_config_file_cmd)
     ld.add_action(declare_use_rviz_cmd)
@@ -225,7 +300,8 @@ def generate_launch_description():
     # Add the actions to launch all of the navigation nodes
     ld.add_action(start_robot_state_publisher_cmd)
     ld.add_action(rviz_cmd)
-    ld.add_action(joint_state_publisher_gui_node)
-    ld.add_action(joint_state_publisher_node)
+    ld.add_action(joint_state_publisher_gui_cmd)
+    ld.add_action(joint_state_publisher_cmd)
+    ld.add_action(bringup_cmd)
 
     return ld
