@@ -1,45 +1,45 @@
 <?xml version="1.0" ?>
 <robot name="rcj2025" xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
-<transmission name="wheel_left_forward_tran">
+<transmission name="wheel_left_forward_joint_tran">
   <type>transmission_interface/SimpleTransmission</type>
   <joint name="wheel_left_forward_joint">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="wheel_left_forward_actr">
+  <actuator name="wheel_left_forward_joint_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="wheel_right_forward_tran">
+<transmission name="wheel_right_forward_joint_tran">
   <type>transmission_interface/SimpleTransmission</type>
   <joint name="wheel_right_forward_joint">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="wheel_right_forward_actr">
+  <actuator name="wheel_right_forward_joint_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="wheel_right_backward_tran">
+<transmission name="wheel_right_backward_joint_tran">
   <type>transmission_interface/SimpleTransmission</type>
   <joint name="wheel_right_backward_joint">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="wheel_right_backward_actr">
+  <actuator name="wheel_right_backward_joint_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-<transmission name="wheel_left_backward_tran">
+<transmission name="wheel_left_backward_joint_tran">
   <type>transmission_interface/SimpleTransmission</type>
   <joint name="wheel_left_backward_joint">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
-  <actuator name="wheel_left_backward_actr">
+  <actuator name="wheel_left_backward_joint_actr">
     <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
