@@ -4,6 +4,15 @@
 <xacro:include filename="$(find rcj2025_description)/urdf/materials.xacro" />
 <xacro:include filename="$(find rcj2025_description)/urdf/rcj2025.trans" />
 <xacro:include filename="$(find rcj2025_description)/urdf/rcj2025.gazebo" />
+
+<link name="base_footprint"/>
+
+<joint name="base_link_joint" type="fixed">
+  <origin xyz="0 0.009 0" rpy="0 0 0"/>
+  <parent link="base_footprint"/>
+  <child link="base_link"/>
+</joint>
+
 <link name="base_link">
   <inertial>
     <origin xyz="-0.0008436056640299374 0.07287967201339762 -0.002172365932740341" rpy="0 0 0"/>
