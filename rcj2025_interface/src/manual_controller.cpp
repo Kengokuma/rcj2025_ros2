@@ -35,7 +35,7 @@ void ManualController::joy_callback(const sensor_msgs::msg::Joy::SharedPtr msg)
 {
   // Handle joystick input
   cmd_vel_.twist.linear.x = msg->axes[2];
-  cmd_vel_.twist.angular.z = msg->axes[3] * 10;
+  cmd_vel_.twist.angular.z = msg->axes[3] * 2;
   RCLCPP_INFO(
     this->get_logger(), "Joy message received: [%f, %f]", cmd_vel_.twist.linear.x,
     cmd_vel_.twist.angular.z);
