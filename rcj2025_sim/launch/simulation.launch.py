@@ -1,3 +1,17 @@
+# Copyright 2025 Kengo
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import os
 import tempfile
 
@@ -69,7 +83,7 @@ def generate_launch_description():
     remappings = [('/tf', 'tf'), ('/tf_static', 'tf_static')]
 
     # Declare the launch arguments
-    
+
     declare_namespace_cmd = DeclareLaunchArgument(
         'namespace', default_value='', description='Top-level namespace'
     )
@@ -92,7 +106,8 @@ def generate_launch_description():
 
     declare_map_yaml_cmd = DeclareLaunchArgument(
         'map',
-        default_value=os.path.join(bringup_dir, 'maps', 'depot.yaml'),  # Try warehouse.yaml!
+        default_value=os.path.join(
+            bringup_dir, 'maps', 'depot.yaml'),  # Try warehouse.yaml!
         description='Full path to map file to load',
     )
 
@@ -160,7 +175,7 @@ def generate_launch_description():
 
     declare_robot_sdf_cmd = DeclareLaunchArgument(
         'robot_sdf',
-        default_value=os.path.join(desc_dir, 'urdf','rcj2025.xacro'),
+        default_value=os.path.join(desc_dir, 'urdf', 'rcj2025.xacro'),
         description='Full path to robot sdf file to spawn the robot in gazebo',
     )
 
@@ -204,7 +219,8 @@ def generate_launch_description():
     )
 
     bringup_cmd = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(bringup_dir,'launch', 'bringup_launch.py')),
+        PythonLaunchDescriptionSource(os.path.join(
+            bringup_dir, 'launch', 'bringup_launch.py')),
         launch_arguments={
             'namespace': namespace,
             'use_namespace': use_namespace,
@@ -239,15 +255,16 @@ def generate_launch_description():
         ]))
 
     set_env_vars_resources = AppendEnvironmentVariable(
-            'GZ_SIM_RESOURCE_PATH',
-            os.path.join(sim_dir, 'worlds'))
+        'GZ_SIM_RESOURCE_PATH',
+        os.path.join(sim_dir, 'worlds'))
     gazebo_client = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(get_package_share_directory('ros_gz_sim'),
                          'launch',
                          'gz_sim.launch.py')
         ),
-        condition=IfCondition(PythonExpression([use_simulator, ' and not ', headless])),
+        condition=IfCondition(PythonExpression(
+            [use_simulator, ' and not ', headless])),
         launch_arguments={'gz_args': ['-v4 -g ']}.items(),
     )
 

@@ -18,7 +18,6 @@ ManualController::ManualController(const rclcpp::NodeOptions & options)
   cmd_vel_.twist.angular.x = 0.0;
   cmd_vel_.twist.angular.y = 0.0;
   cmd_vel_.twist.angular.z = 0.0;
-
 }
 
 ManualController::~ManualController()
@@ -37,7 +36,9 @@ void ManualController::joy_callback(const sensor_msgs::msg::Joy::SharedPtr msg)
   // Handle joystick input
   cmd_vel_.twist.linear.x = msg->axes[2];
   cmd_vel_.twist.angular.z = msg->axes[3] * 10;
-  RCLCPP_INFO(this->get_logger(), "Joy message received: [%f, %f]", cmd_vel_.twist.linear.x, cmd_vel_.twist.angular.z);
+  RCLCPP_INFO(
+    this->get_logger(), "Joy message received: [%f, %f]", cmd_vel_.twist.linear.x,
+    cmd_vel_.twist.angular.z);
 }
 
 }  // namespace rcj2025_interface

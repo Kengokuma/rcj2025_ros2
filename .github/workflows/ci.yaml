@@ -28,12 +28,12 @@ jobs:
       - name: Build with colcon
         run: |
           source /opt/ros/${{ matrix.ros_distro }}/setup.bash
-          colcon build --event-handlers console_direct+
+          colcon build --event-handlers console_direct+ --symlink-install
 
       - name: Run tests
         run: |
           source install/setup.bash
-          colcon test --event-handlers console_direct+
+          colcon test --event-handlers console_direct+ --return-code-on-test-failure
 
       - name: Check test results
         run: colcon test-result --verbose
