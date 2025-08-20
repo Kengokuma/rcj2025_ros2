@@ -26,7 +26,6 @@ def generate_launch_description():
     # Get the launch directory
     sim_dir = get_package_share_directory('rcj2025_sim')
     desc_dir = get_package_share_directory('rcj2025_description')
-    launch_dir = os.path.join(sim_dir, 'launch')
 
     # Create the launch configuration variables
     namespace = LaunchConfiguration('namespace')
@@ -254,7 +253,7 @@ def generate_launch_description():
 
     gz_robot = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(launch_dir, 'spawn.launch.py')),
+            os.path.join(sim_dir, 'launch', 'spawn.launch.py')),
         launch_arguments={'namespace': namespace,
                           'use_simulator': use_simulator,
                           'use_sim_time': use_sim_time,
@@ -266,6 +265,20 @@ def generate_launch_description():
                           'roll': pose['R'],
                           'pitch': pose['P'],
                           'yaw': pose['Y']}.items())
+
+    manual_control = Node(
+        package='rcj2025_interface',
+        executable='manual_controller_node',
+        name='manual_controller_node',
+        output='screen',
+    )
+
+    joy = Node(
+        package='joy',
+        executable='joy_node',
+        name='joy_node',
+        output='screen',
+    )
 
     # Create the launch description and populate
     ld = LaunchDescription()
@@ -303,5 +316,8 @@ def generate_launch_description():
     ld.add_action(joint_state_publisher_gui_cmd)
     ld.add_action(joint_state_publisher_cmd)
     ld.add_action(bringup_cmd)
+
+    ld.add_action(manual_control)
+    ld.add_action(joy)
 
     return ld
