@@ -1,3 +1,17 @@
+# Copyright 2025 Kengo
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import os
 import tempfile
 
@@ -26,7 +40,6 @@ def generate_launch_description():
     # Get the launch directory
     sim_dir = get_package_share_directory('rcj2025_sim')
     desc_dir = get_package_share_directory('rcj2025_description')
-    launch_dir = os.path.join(sim_dir, 'launch')
 
     # Create the launch configuration variables
     namespace = LaunchConfiguration('namespace')
@@ -70,7 +83,7 @@ def generate_launch_description():
     remappings = [('/tf', 'tf'), ('/tf_static', 'tf_static')]
 
     # Declare the launch arguments
-    
+
     declare_namespace_cmd = DeclareLaunchArgument(
         'namespace', default_value='', description='Top-level namespace'
     )
@@ -93,7 +106,8 @@ def generate_launch_description():
 
     declare_map_yaml_cmd = DeclareLaunchArgument(
         'map',
-        default_value=os.path.join(bringup_dir, 'maps', 'depot.yaml'),  # Try warehouse.yaml!
+        default_value=os.path.join(
+            bringup_dir, 'maps', 'depot.yaml'),  # Try warehouse.yaml!
         description='Full path to map file to load',
     )
 
@@ -161,7 +175,7 @@ def generate_launch_description():
 
     declare_robot_sdf_cmd = DeclareLaunchArgument(
         'robot_sdf',
-        default_value=os.path.join(desc_dir, 'urdf','rcj2025.xacro'),
+        default_value=os.path.join(desc_dir, 'urdf', 'rcj2025.xacro'),
         description='Full path to robot sdf file to spawn the robot in gazebo',
     )
 
@@ -205,7 +219,8 @@ def generate_launch_description():
     )
 
     bringup_cmd = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(bringup_dir,'launch', 'bringup_launch.py')),
+        PythonLaunchDescriptionSource(os.path.join(
+            bringup_dir, 'launch', 'bringup_launch.py')),
         launch_arguments={
             'namespace': namespace,
             'use_namespace': use_namespace,
@@ -240,21 +255,22 @@ def generate_launch_description():
         ]))
 
     set_env_vars_resources = AppendEnvironmentVariable(
-            'GZ_SIM_RESOURCE_PATH',
-            os.path.join(sim_dir, 'worlds'))
+        'GZ_SIM_RESOURCE_PATH',
+        os.path.join(sim_dir, 'worlds'))
     gazebo_client = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(get_package_share_directory('ros_gz_sim'),
                          'launch',
                          'gz_sim.launch.py')
         ),
-        condition=IfCondition(PythonExpression([use_simulator, ' and not ', headless])),
+        condition=IfCondition(PythonExpression(
+            [use_simulator, ' and not ', headless])),
         launch_arguments={'gz_args': ['-v4 -g ']}.items(),
     )
 
     gz_robot = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(launch_dir, 'spawn.launch.py')),
+            os.path.join(sim_dir, 'launch', 'spawn.launch.py')),
         launch_arguments={'namespace': namespace,
                           'use_simulator': use_simulator,
                           'use_sim_time': use_sim_time,
@@ -266,6 +282,20 @@ def generate_launch_description():
                           'roll': pose['R'],
                           'pitch': pose['P'],
                           'yaw': pose['Y']}.items())
+
+    manual_control = Node(
+        package='rcj2025_interface',
+        executable='manual_controller_node',
+        name='manual_controller_node',
+        output='screen',
+    )
+
+    joy = Node(
+        package='joy',
+        executable='joy_node',
+        name='joy_node',
+        output='screen',
+    )
 
     # Create the launch description and populate
     ld = LaunchDescription()
@@ -303,5 +333,8 @@ def generate_launch_description():
     ld.add_action(joint_state_publisher_gui_cmd)
     ld.add_action(joint_state_publisher_cmd)
     ld.add_action(bringup_cmd)
+
+    ld.add_action(manual_control)
+    ld.add_action(joy)
 
     return ld
