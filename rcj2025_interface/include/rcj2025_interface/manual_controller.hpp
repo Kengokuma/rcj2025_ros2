@@ -18,10 +18,10 @@ public:
 private:
   void publish_cmd_vel();
   void joy_callback(const sensor_msgs::msg::Joy::SharedPtr msg);
-  rclcpp::Publisher<geometry_msgs::msg::TwistStamped>::SharedPtr cmd_vel_pub_;
+  rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_pub_;
   rclcpp::Subscription<sensor_msgs::msg::Joy>::SharedPtr joy_sub_;
   rclcpp::TimerBase::SharedPtr timer_;
-  geometry_msgs::msg::TwistStamped cmd_vel_;
+  geometry_msgs::msg::Twist cmd_vel_;
 };
 
 }  // namespace rcj2025_interface

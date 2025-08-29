@@ -19,15 +19,15 @@
         <min_linear_acceleration>-2</min_linear_acceleration>
         <max_angular_acceleration>3</max_angular_acceleration>
         <min_angular_acceleration>-3</min_angular_acceleration>
-        <max_linear_velocity>0.5</max_linear_velocity>
-        <min_linear_velocity>-0.5</min_linear_velocity>
+        <max_linear_velocity>1.0</max_linear_velocity>
+        <min_linear_velocity>-1.0</min_linear_velocity>
         <max_angular_velocity>2.0</max_angular_velocity>
         <min_angular_velocity>-2.0</min_angular_velocity>
         <topic>/cmd_vel</topic>
         <odom_topic>/odom</odom_topic>
         <tf_topic>tf</tf_topic>
         <frame_id>odom</frame_id>
-        <child_frame_id>base_link</child_frame_id>
+        <child_frame_id>base_footprint</child_frame_id>
         <odom_publish_frequency>30</odom_publish_frequency>
       </plugin>
       <plugin filename="gz-sim-imu-system"
@@ -76,16 +76,18 @@
   <self_collide>true</self_collide>
 </gazebo>
 
-<gazebo reference="imu_link">
+<gazebo reference="">
     <sensor name="imu_sensor" type="imu">
     <always_on>1</always_on>
     <update_rate>10</update_rate>
     <visualize>true</visualize>
     <topic>imu</topic>
+    <gz_frame_id>imu_link</gz_frame_id>
     </sensor>
 </gazebo>
-  <gazebo reference="lidar_link">
+  <gazebo reference="base_scan">
   <sensor name='gpu_lidar' type='gpu_lidar'>"
+    <gz_frame_id>base_scan</gz_frame_id>
     <topic>scan</topic>
     <update_rate>10</update_rate>
     <ray>

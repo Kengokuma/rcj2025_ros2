@@ -66,7 +66,7 @@ def generate_launch_description():
     pose = {
         'x': LaunchConfiguration('x_pose', default='0.00'),
         'y': LaunchConfiguration('y_pose', default='0.00'),
-        'z': LaunchConfiguration('z_pose', default='0.009'),
+        'z': LaunchConfiguration('z_pose', default='0.00'),
         'R': LaunchConfiguration('roll', default='0.00'),
         'P': LaunchConfiguration('pitch', default='0.00'),
         'Y': LaunchConfiguration('yaw', default='0.00'),
@@ -283,20 +283,6 @@ def generate_launch_description():
                           'pitch': pose['P'],
                           'yaw': pose['Y']}.items())
 
-    manual_control = Node(
-        package='rcj2025_interface',
-        executable='manual_controller_node',
-        name='manual_controller_node',
-        output='screen',
-    )
-
-    joy = Node(
-        package='joy',
-        executable='joy_node',
-        name='joy_node',
-        output='screen',
-    )
-
     # Create the launch description and populate
     ld = LaunchDescription()
 
@@ -333,8 +319,5 @@ def generate_launch_description():
     ld.add_action(joint_state_publisher_gui_cmd)
     ld.add_action(joint_state_publisher_cmd)
     ld.add_action(bringup_cmd)
-
-    ld.add_action(manual_control)
-    ld.add_action(joy)
 
     return ld
