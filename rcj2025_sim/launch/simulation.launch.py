@@ -101,7 +101,7 @@ def generate_launch_description():
     )
 
     declare_slam_cmd = DeclareLaunchArgument(
-        'slam', default_value='False', description='Whether run a SLAM'
+        'slam', default_value='True', description='Whether run a SLAM'
     )
 
     declare_map_yaml_cmd = DeclareLaunchArgument(
@@ -137,7 +137,7 @@ def generate_launch_description():
 
     declare_rviz_config_file_cmd = DeclareLaunchArgument(
         'rviz_config_file',
-        default_value=os.path.join(desc_dir, 'config', 'display.rviz'),
+        default_value=os.path.join(sim_dir, 'rviz', 'nav2_view.rviz'),
         description='Full path to the RVIZ config file to use',
     )
 

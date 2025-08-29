@@ -52,7 +52,7 @@ def generate_launch_description():
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
         'use_sim_time',
-        default_value='true',
+        default_value='True',
         description='Use simulation (Gazebo) clock if true',
     )
 
@@ -72,9 +72,15 @@ def generate_launch_description():
                     sim_dir, 'config', 'ros_gz_bridge.yaml'
                 ),
                 'use_sim_time': use_sim_time,
+                'qos_overrides./scan.subscriber.reliability': 'best_effort',
+                'qos_overrides./scan.subscriber.durability': 'volatile',
+                'qos_overrides./scan.subscriber.depth': 10,
+                'qos_overrides./imu.subscriber.reliability': 'best_effort',
+                'qos_overrides./imu.subscriber.durability': 'volatile',
+                'qos_overrides./imu.subscriber.depth': 10
             }
         ],
-        output='screen',
+        output='screen'
     )
 
     camera_bridge_image = Node(
