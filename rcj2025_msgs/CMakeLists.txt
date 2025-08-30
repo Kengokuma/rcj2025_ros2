@@ -13,10 +13,13 @@ find_package(rosidl_default_generators REQUIRED)
 set(srv_files
   "srv/GoalPoints.srv"
 )
+
 rosidl_generate_interfaces(${PROJECT_NAME}
   ${srv_files}
   DEPENDENCIES geometry_msgs
 )
+
+ament_export_dependencies(rosidl_default_runtime)
 
 # uncomment the following section in order to fill in
 # further dependencies manually.

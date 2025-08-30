@@ -8,14 +8,22 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(example_interfaces REQUIRED)
+find_package(rcj2025_msgs REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(geometry_msgs REQUIRED)
 find_package(std_msgs REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 
 add_executable(state_manager src/state_manager.cpp)
-ament_target_dependencies(state_manager rclcpp std_msgs example_interfaces)
+ament_target_dependencies(state_manager
+  rclcpp
+  std_msgs
+  example_interfaces
+  geometry_msgs
+  rcj2025_msgs
+)
 
 install(TARGETS
   state_manager
