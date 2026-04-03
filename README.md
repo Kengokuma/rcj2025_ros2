@@ -42,5 +42,4 @@ rm -rf build/ install/ log/
 ```
 ### システムの起動方法
 ```
-source install/setup.bash
 ros2 launch rcj2025_bringup rcj2025.launch.py
