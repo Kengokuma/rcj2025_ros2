@@ -1,0 +1,17 @@
+name: Translate README
+on:
+  push:
+    branches: main
+    paths: README.md
+  workflow_dispatch:
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: k42um/readme-translation@v2
+        with:
+          deepl_api_key: ${{ secrets.DEEPL_API_KEY }}
