@@ -1,3 +1,8 @@
+<!-- readme-translation:start -->
+<div align="right"><a href="README.en.md">🇺🇸 English</a></div>
+<!-- ↑ このブロックは readme-translation アクションが自動生成しています。削除しないでください。 -->
+<!-- readme-translation:end -->
+
 # rcj2025_ros2
 ロボカップジュニア関西オープン大会2025　チーム「Remember」 ROS2ソフトウェア
 
